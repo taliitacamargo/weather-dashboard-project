@@ -20,8 +20,10 @@ $(document).ready(function () {
     else 
     if(localStorage.length > 0) {
         for (i = 0 ; i < localStorage.length; i++) {
+
             searchResultArray.push(JSON.parse(localStorage.getItem(i)));
 
+            getSearchList(i, searchResultArray[i].city,searchResultList[i].state);
         }
 
         maxArray = searchResultArray.length-1;
@@ -57,10 +59,44 @@ $(document).ready(function () {
 
             localStorage.setItem(localStorageitems,JSON.stringify(stringList));
             searchResultArray.push(stringList);
-            searchWeather(queryUTL,cityNameD,stateNameD);
+            searchWeather(queryURL,cityNameD,stateNameD);
             getSearchList (localStorageitems, cityNameD, stateDisplayName);
 
         })
-    })
+    });
 
-})
+    function getSearchList (i, city, state) {
+        var cityStateD = city + "," + state;
+        var itemsList = $("<li>");
+        itemsList. addClass ("list-group-item list-group-item-action");
+        itemsList.attr("data-index" , i);
+        itemsList.attr("data-toggle", "list");
+        itemsList.attr("role", "tab");
+        itemsList.text(cityStateD);
+        
+        searchresultsList.append(itemsList);
+
+    }
+    
+
+});
+
+function runWeatherSearch (URL,city,state) {
+    $.ajax ({
+        method: "GET"
+
+    }).then (function(response){
+        var cityStateD = city + "," + state;
+        var img = response.current.weather[0].icon;
+        var wind = response.current.wind_speed;
+        var temp = response.current.temp;
+        var tempFeel = response.current.feels_like;
+        var humidity = response.current.humidity;
+        var uvIndex = response.current.uvi;
+        var uvIDClass;
+        var imgEl = $("<img>");
+        var pEL = $("<p>");
+        var iconURL = "https://api.openweathermap.org/img/wn/" + img +".png";
+        
+    })
+}
