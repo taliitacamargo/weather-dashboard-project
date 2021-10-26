@@ -1,23 +1,54 @@
     var searchResultList = $("list-items");
     var searchResultArray = new Array;
-    var cityNameD;
-    var stateNameD; 
-    var lastURL;
+    var searchEl = document.querySelector("#input-field");
     var lastCity; 
     var lastState;
     var maxArray;
     var apiKey = "7f59f6fb48c2adc5a5ee0d046a826198";
-    var mainURL = "https://api.openweathermap.org/data/2.5/onecall?lat=39.9523&lon=-75.1638&lon=-75.1638" + "&units=imperial" + "&appid=" + apiKey;
-    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +cityNameD + "&appid=" +apiKey + "&units=imperial";
-    var latitudeHere;
-    var longitudeHere;
-    var latitude;
-    var longitude;
 
 
-        $("#submit-button").on('click', function (){
-        var cityNameD = $("#input-field").val();
+    // var mainURL = "https://api.openweathermap.org/data/2.5/onecall?lat=+latitude+&lon=+ longitude + "&units=imperial" + "&appid=" + apiKey;
+    // var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" +cityNameD + "&appid=" +apiKey + "&units=imperial";
+    // var latitude;
+    // var longitude;
 
+
+    // TODO: Create Weather call function with Lat and Lon from Coords
+    //      - Execute render functions here
+    //      - Assign variables to fetch Promise 
+
+    // TODO: Create Render Functions using the CreateElement method or changing text.value
+
+
+    function coordsCall (cityName) {
+        var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" +apiKey + "&units=imperial";
+        console.log(cityName);
+        fetch (queryURL) 
+        .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            console.log(data);
+            //   TODO: Take data from Weather promise and assign to variables
+            //   TODO: Call Weather function here 
+          });
+    }
+
+   
+ 
+
+
+
+    function formSubmitHandler (event){
+        event.preventDefault();
+        var cityNameD = searchEl.value;
+        console.log(cityNameD);
+        coordsCall(cityNameD);
+    }
+
+        $("#submit-button").on('click', formSubmitHandler) 
+
+        // console.log(cityNameD);
 
 
 
