@@ -14,8 +14,32 @@
 
 
     // TODO: Create Weather call function with Lat and Lon from Coords
-    //      - Execute render functions here
-    //      - Assign variables to fetch Promise 
+    // - Execute render functions here
+    // - Assign variables to fetch Promise 
+    function weatherCall(response) {
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude
+      // cityName = 
+      // stateName = 
+      var queryURL = "https://api.openweathermap.org/data/2.5/weather?lat=" + latitude + "&lon=" + longitude + "&units=imperial" + "&appid="+ apiKey;
+      console.log(queryURL);
+    fetch (queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      var temperature = data.main;
+      var place = data.name;
+      var description, icon = data.weather[0];
+      
+      var iconURL = "https://api.openweathermap.org/img/wn/" +icon + "@2x.png";
+      var temp = (temp * 9) / 5+32;
+
+
+      
+    })
+    }
+    //      
 
     // TODO: Create Render Functions using the CreateElement method or changing text.value
 
@@ -35,8 +59,6 @@
     }
 
    
- 
-
 
 
     function formSubmitHandler (event){
