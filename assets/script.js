@@ -34,9 +34,6 @@
       
       var iconURL = "https://api.openweathermap.org/img/wn/" +icon + "@2x.png";
       var temp = (temp * 9) / 5+32;
-
-
-      
     })
     }
     //      
@@ -53,6 +50,13 @@
           })
           .then(function (data) {
             console.log(data);
+            var cityState = name ;
+            console.log (cityState);
+            var wind = data.current.wind.speed;
+            var humidity = data.current.feels_like;
+            var uvIndex = data.current.uvi;
+
+          
             //   TODO: Take data from Weather promise and assign to variables
             //   TODO: Call Weather function here 
           });
